@@ -1,5 +1,7 @@
 # Griddler::Mailgun
 
+[![Code Climate](https://codeclimate.com/github/bradpauly/griddler-mailgun.png)](https://codeclimate.com/github/bradpauly/griddler-mailgun)
+
 This was extracted from the [griddler gem](https://github.com/thoughtbot/griddler) and is used to
 parse emails forwarded to your application from [mailgun](http://mailgun.com/).
 
@@ -46,3 +48,15 @@ forward("http://example.com/email_processor")
 * [mailgun](http://www.mailgun.com)
 * [mailgun API - Routes](http://documentation.mailgun.com/api-routes.html)
 * [mailgun User Maunual - Routes](http://documentation.mailgun.com/user_manual.html#routes)
+
+## Credits
+
+Griddler::Mailgun was extracted from Griddler by Brad Pauly.
+
+Griddler was written by Caleb Thompson and Joel Oliveira.
+
+## License
+
+Griddler::Mailgun is Copyright © 2014 Brad Pauly. It is free
+software, and may be redistributed under the terms specified
+in the LICENSE file.
