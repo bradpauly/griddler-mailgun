@@ -11,7 +11,7 @@ Add this line to your application's Gemfile:
 
 ```ruby
 gem 'griddler'
-gem 'griddler-sendgrid'
+gem 'griddler-mailgun'
 ```
 
 Then execute:

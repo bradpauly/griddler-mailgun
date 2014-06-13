@@ -58,6 +58,10 @@ describe Griddler::Mailgun::Adapter, '.normalize_params' do
     ]
   end
 
+  it 'handles missing params' do
+    normalized_params = Griddler::Mailgun::Adapter.normalize_params(short_params)
+  end
+
   def upload_1
     @upload_1 ||= ActionDispatch::Http::UploadedFile.new(
       filename: 'photo1.jpg',
@@ -86,6 +90,15 @@ describe Griddler::Mailgun::Adapter, '.normalize_params' do
       [\"To\", \"John Doe <johndoe@example.com>, Jane Doe <janedoe@example.com>\"],
       [\"Cc\", \"Brandon Stark <brandon@example.com>, Arya Stark <arya@example.com>\"]
     ]"
+  end
+
+  def short_params
+    params = {
+      To: 'Hello World <hi@example.com>',
+      From: 'There <there@example.com>',
+      Cc: 'emily@example.com',
+      'body-plain' => 'hi',
+    }
   end
 
   def default_params

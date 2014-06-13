@@ -48,6 +48,7 @@ module Griddler
       end
 
       def extract_headers
+        params['message-headers'] ||= '{}'
         extracted_headers = {}
         parsed_headers = JSON.parse(params['message-headers'])
         parsed_headers.each{ |h| extracted_headers[h[0]] = h[1] }
