@@ -1,5 +1,5 @@
 require 'griddler'
-require "griddler/mailgun/version"
+require 'griddler/mailgun/version'
 require 'griddler/mailgun/adapter'
 
 module Griddler
