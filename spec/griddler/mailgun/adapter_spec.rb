@@ -60,6 +60,7 @@ describe Griddler::Mailgun::Adapter, '.normalize_params' do
 
   it 'handles missing params' do
     normalized_params = Griddler::Mailgun::Adapter.normalize_params(short_params)
+    expect(normalized_params[:to]).to eq ['johndoe@example.com']
   end
 
   def upload_1
@@ -93,12 +94,13 @@ describe Griddler::Mailgun::Adapter, '.normalize_params' do
   end
 
   def short_params
-    params = {
-      To: 'Hello World <hi@example.com>',
-      From: 'There <there@example.com>',
-      Cc: 'emily@example.com',
-      'body-plain' => 'hi',
-    }
+    params = ActiveSupport::HashWithIndifferentAccess.new(
+      {
+        "from" => "Jon Snow <jon@example.com>",
+        "recipient" => "johndoe@example.com",
+        "body-plain" => "hi"
+      }
+    )
   end
 
   def default_params

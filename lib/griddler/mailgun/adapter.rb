@@ -39,7 +39,7 @@ module Griddler
       end
 
       def cc_recipients
-        cc = param_or_header(:Cc)
+        cc = param_or_header(:Cc) || ''
         cc.split(',').map(&:strip)
       end
 
@@ -48,19 +48,21 @@ module Griddler
       end
 
       def extract_headers
-        return nil unless params['message-headers']
-
         extracted_headers = {}
-        parsed_headers = JSON.parse(params['message-headers'])
-        parsed_headers.each{ |h| extracted_headers[h[0]] = h[1] }
+        if params['message-headers']
+          parsed_headers = JSON.parse(params['message-headers'])
+          parsed_headers.each{ |h| extracted_headers[h[0]] = h[1] }
+        end
         ActiveSupport::HashWithIndifferentAccess.new(extracted_headers)
       end
 
       def param_or_header(key)
         if params[key].present?
           params[key]
-        else
+        elsif headers[key].present?
           headers[key]
+        else
+          nil
         end
       end
 
