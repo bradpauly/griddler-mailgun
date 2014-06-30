@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["hi@bradpauly.com"]
   spec.summary       = %q{Mailgun adapter for Griddler}
   spec.description   = %q{Adapter to allow the use of mailgun forwarded routes with Griddler.}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/bradpauly/griddler-mailgun"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")

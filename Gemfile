@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
 
-gem 'griddler', github: 'thoughtbot/griddler'
+gem 'griddler', '1.0.0'
 
 gemspec
