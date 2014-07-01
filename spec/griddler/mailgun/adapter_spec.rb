@@ -7,6 +7,12 @@ describe Griddler::Mailgun::Adapter do
 end
 
 describe Griddler::Mailgun::Adapter, '.normalize_params' do
+  it 'works with Griddler::Email' do
+    normalized_params = Griddler::Mailgun::Adapter.normalize_params(default_params)
+    griddler_email = Griddler::Email.new(normalized_params)
+    puts griddler_email.inspect
+  end
+
   it 'falls back to headers for cc' do
     params = default_params.merge(Cc: '')
     normalized_params = Griddler::Mailgun::Adapter.normalize_params(params)

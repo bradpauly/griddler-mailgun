@@ -18,8 +18,7 @@ module Griddler
           subject: params[:subject],
           text: params['body-plain'],
           html: params['body-html'],
-          attachments: attachment_files,
-          headers: headers
+          attachments: attachment_files
         }
       end
 
