@@ -5,13 +5,15 @@
 This was extracted from the [griddler gem](https://github.com/thoughtbot/griddler) and is used to
 parse emails forwarded to your application from [mailgun](http://mailgun.com/).
 
+**IMPORTANT:** Please use version 1.0.1 or higher. There was a bug in version 1.0.0.
+
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'griddler'
-gem 'griddler-mailgun'
+gem 'griddler', '~> 1.0.0'
+gem 'griddler-mailgun', '~> 1.0.1'
 ```
 
 Then execute:
