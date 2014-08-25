@@ -69,6 +69,16 @@ describe Griddler::Mailgun::Adapter, '.normalize_params' do
     expect(normalized_params[:to]).to eq ['johndoe@example.com']
   end
 
+  it 'handles message-headers' do
+    params = default_params.merge(
+      'message-headers' => '[["NotCc", "emily@example.mailgun.org"], ["Reply-To", "mail2@example.mailgun.org"]]'
+    )
+    normalized_params = Griddler::Mailgun::Adapter.normalize_params(params)
+    email = Griddler::Email.new(normalized_params)
+    email.headers["Reply-To"].should eq "mail2@example.mailgun.org"
+  end
+
+
   def upload_1
     @upload_1 ||= ActionDispatch::Http::UploadedFile.new(
       filename: 'photo1.jpg',
