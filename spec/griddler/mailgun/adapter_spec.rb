@@ -78,6 +78,16 @@ describe Griddler::Mailgun::Adapter, '.normalize_params' do
     email.headers["Reply-To"].should eq "mail2@example.mailgun.org"
   end
 
+  it 'adds Bcc when it exists' do
+    params = default_params.merge('Bcc' => 'bcc@example.com')
+    normalized_params = Griddler::Mailgun::Adapter.normalize_params(params)
+    expect(normalized_params[:bcc]).to eq ['bcc@example.com']
+  end
+
+  it 'bcc is empty array when it missing' do
+    normalized_params = Griddler::Mailgun::Adapter.normalize_params(default_params)
+    expect(normalized_params[:bcc]).to eq []
+  end
 
   def upload_1
     @upload_1 ||= ActionDispatch::Http::UploadedFile.new(
