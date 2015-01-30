@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Griddler::Mailgun::Adapter do
   it 'registers itself with griddler' do
-    Griddler.adapter_registry[:mailgun].should eq Griddler::Mailgun::Adapter
+    expect(Griddler.adapter_registry[:mailgun]).to eq Griddler::Mailgun::Adapter
   end
 end
 
@@ -27,12 +27,12 @@ describe Griddler::Mailgun::Adapter, '.normalize_params' do
     )
 
     normalized_params = Griddler::Mailgun::Adapter.normalize_params(params)
-    normalized_params[:attachments].should eq [upload_1, upload_2]
+    expect(normalized_params[:attachments]).to eq [upload_1, upload_2]
   end
 
   it 'has no attachments' do
     normalized_params = Griddler::Mailgun::Adapter.normalize_params(default_params)
-    normalized_params[:attachments].should be_empty
+    expect(normalized_params[:attachments]).to be_empty
   end
 
   it 'gets sender from headers' do
@@ -75,9 +75,19 @@ describe Griddler::Mailgun::Adapter, '.normalize_params' do
     )
     normalized_params = Griddler::Mailgun::Adapter.normalize_params(params)
     email = Griddler::Email.new(normalized_params)
-    email.headers["Reply-To"].should eq "mail2@example.mailgun.org"
+    expect(email.headers["Reply-To"]).to eq "mail2@example.mailgun.org"
   end
 
+  it 'adds Bcc when it exists' do
+    params = default_params.merge('Bcc' => 'bcc@example.com')
+    normalized_params = Griddler::Mailgun::Adapter.normalize_params(params)
+    expect(normalized_params[:bcc]).to eq ['bcc@example.com']
+  end
+
+  it 'bcc is empty array when it missing' do
+    normalized_params = Griddler::Mailgun::Adapter.normalize_params(default_params)
+    expect(normalized_params[:bcc]).to eq []
+  end
 
   def upload_1
     @upload_1 ||= ActionDispatch::Http::UploadedFile.new(
@@ -110,7 +120,7 @@ describe Griddler::Mailgun::Adapter, '.normalize_params' do
   end
 
   def short_params
-    params = ActiveSupport::HashWithIndifferentAccess.new(
+    ActiveSupport::HashWithIndifferentAccess.new(
       {
         "from" => "Jon Snow <jon@example.com>",
         "recipient" => "johndoe@example.com",
@@ -120,7 +130,7 @@ describe Griddler::Mailgun::Adapter, '.normalize_params' do
   end
 
   def default_params
-    params = ActiveSupport::HashWithIndifferentAccess.new(
+    ActiveSupport::HashWithIndifferentAccess.new(
       {
         "Cc"=>"Brandon Stark <brandon@example.com>, Arya Stark <arya@example.com>",
         "From"=>"Jon Snow <jon@example.com>",

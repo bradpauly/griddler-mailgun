@@ -1,6 +1,8 @@
 module Griddler
   module Mailgun
     class Adapter
+      attr_reader :params
+
       def initialize(params)
         @params = params
       end
@@ -14,6 +16,7 @@ module Griddler
         {
           to: to_recipients,
           cc: cc_recipients,
+          bcc: Array.wrap(param_or_header(:Bcc)),
           from: determine_sender,
           subject: params[:subject],
           text: params['body-plain'],
@@ -23,9 +26,7 @@ module Griddler
         }
       end
 
-      private
-
-      attr_reader :params
+    private
 
       def determine_sender
         sender = param_or_header(:From)
@@ -65,7 +66,7 @@ module Griddler
         # fake headers here for now, until we can find a better way to pass the parsed
         # headers directly to Griddler
 
-        s = headers.to_a.collect { |header| "#{header[0]}: #{header[1]}" }.join("\n")
+        headers.to_a.collect { |header| "#{header[0]}: #{header[1]}" }.join("\n")
       end
 
       def param_or_header(key)
