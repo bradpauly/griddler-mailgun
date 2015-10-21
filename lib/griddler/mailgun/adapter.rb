@@ -22,7 +22,7 @@ module Griddler
           text: params['body-plain'],
           html: params['body-html'],
           attachments: attachment_files,
-          headers: serialized_headers
+          headers: headers
         }
       end
 
@@ -55,18 +55,6 @@ module Griddler
           parsed_headers.each{ |h| extracted_headers[h[0]] = h[1] }
         end
         ActiveSupport::HashWithIndifferentAccess.new(extracted_headers)
-      end
-
-      def serialized_headers
-
-        # Griddler expects unparsed headers to pass to ActionMailer, which will manually
-        # unfold, split on line-endings, and parse into individual fields.
-        #
-        # Mailgun already provides fully-parsed headers in JSON -- so we're reconstructing
-        # fake headers here for now, until we can find a better way to pass the parsed
-        # headers directly to Griddler
-
-        headers.to_a.collect { |header| "#{header[0]}: #{header[1]}" }.join("\n")
       end
 
       def param_or_header(key)
