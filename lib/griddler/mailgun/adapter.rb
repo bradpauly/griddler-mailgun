@@ -87,7 +87,7 @@ module Griddler
             params.delete("attachment-#{index+1}")
           end
         else
-          params['attachments']
+          params['attachments'] || []
         end
       end
     end
