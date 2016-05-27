@@ -30,9 +30,10 @@ describe Griddler::Mailgun::Adapter, '.normalize_params' do
     expect(normalized_params[:attachments]).to eq [upload_1, upload_2]
   end
 
-  it 'receives attachments sent from store action' do
+  it "receives attachments sent from store action" do
     params = default_params.merge(
-      'attachments' => [{ url: 'sample.url', name: 'sample name' }, { url: 'sample2.url', name: 'sample name 2' }]
+      'attachments' => [{ url: "sample.url", name: "sample name" }, 
+                        { url: "sample2.url", name: "sample name 2" }]
     )
     normalized_params = Griddler::Mailgun::Adapter.normalize_params(params)
     expect(normalized_params[:attachments].length).to eq 2
