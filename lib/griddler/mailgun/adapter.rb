@@ -80,10 +80,14 @@ module Griddler
       end
 
       def attachment_files
-        attachment_count = params['attachment-count'].to_i
+        if params["attachment-count"].present?
+          attachment_count = params["attachment-count"].to_i
 
-        attachment_count.times.map do |index|
-          params.delete("attachment-#{index+1}")
+          attachment_count.times.map do |index|
+            params.delete("attachment-#{index+1}")
+          end
+        else
+          params["attachments"] || []
         end
       end
     end
