@@ -12,8 +12,8 @@ parse emails forwarded to your application from [mailgun](http://mailgun.com/).
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'griddler', '~> 1.0.0'
-gem 'griddler-mailgun', '~> 1.0.1'
+gem 'griddler', '~> 1.1.0'
+gem 'griddler-mailgun', '~> 1.0.3'
 ```
 
 Then execute:
@@ -30,7 +30,7 @@ bundle install
 
 Mailgun uses [routes](http://documentation.mailgun.com/user_manual.html#routes) to filter incoming emails and forward them to your app. A route is made up of a filter and an action. [The filter](http://documentation.mailgun.com/api-routes.html#filters) matches emails based on its properties and [the action](http://documentation.mailgun.com/api-routes.html#actions) determines what happens to the matched email.
 
-For example, to forward any email sent to an example.net address to http://example.com/email_processor 
+For example, to forward any email sent to an example.net address to http://example.com/email_processor
 the following route would be used:
 
 Filter Expression:
