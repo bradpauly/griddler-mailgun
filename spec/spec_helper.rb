@@ -1,3 +1,4 @@
+require 'griddler'
 require 'griddler/testing'
 require 'griddler/mailgun'
 require 'action_dispatch'
