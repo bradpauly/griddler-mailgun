@@ -98,8 +98,8 @@ describe Griddler::Mailgun::Adapter, '.normalize_params' do
       "stripped-signature" => "The Lannisters send their regards"
     )
     normalized_params = Griddler::Mailgun::Adapter.normalize_params(params)
-    expect(normalized_params[:vendor_specific][:stripped_signature])
-      .to eq "The Lannisters send their regards"
+    expect(normalized_params[:vendor_specific][:stripped_signature]).
+      to eq "The Lannisters send their regards"
   end
 
   it "adds stripped-text as a vendor specific param" do
@@ -107,8 +107,8 @@ describe Griddler::Mailgun::Adapter, '.normalize_params' do
       "stripped-text" => "Lorem ipsum dolor sit amet."
     )
     normalized_params = Griddler::Mailgun::Adapter.normalize_params(params)
-    expect(normalized_params[:vendor_specific][:stripped_text])
-      .to eq "Lorem ipsum dolor sit amet."
+    expect(normalized_params[:vendor_specific][:stripped_text]).
+      to eq "Lorem ipsum dolor sit amet."
   end
 
   it "adds stripped-html as a vendor specific param" do
@@ -116,8 +116,8 @@ describe Griddler::Mailgun::Adapter, '.normalize_params' do
       "stripped-html" => "<div>Lorem ipsum dolor sit amet.</div>"
     )
     normalized_params = Griddler::Mailgun::Adapter.normalize_params(params)
-    expect(normalized_params[:vendor_specific][:stripped_html])
-      .to eq "<div>Lorem ipsum dolor sit amet.</div>"
+    expect(normalized_params[:vendor_specific][:stripped_html]).
+      to eq "<div>Lorem ipsum dolor sit amet.</div>"
   end
 
   it 'bcc is empty array when it missing' do
