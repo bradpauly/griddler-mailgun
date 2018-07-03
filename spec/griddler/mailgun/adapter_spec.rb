@@ -93,22 +93,31 @@ describe Griddler::Mailgun::Adapter, '.normalize_params' do
     expect(normalized_params[:bcc]).to eq ['bcc@example.com']
   end
 
-  it 'adds stripped-signature as a vendor specific param' do
+  it "adds stripped-signature as a vendor specific param" do
     params = default_params.merge(
-      "stripped-signature" => "The Lannisters send their regards",
+      "stripped-signature" => "The Lannisters send their regards"
     )
     normalized_params = Griddler::Mailgun::Adapter.normalize_params(params)
-    expect(normalized_params[:vendor_specific][:stripped_signature]).to eq "The Lannisters send their regards"
+    expect(normalized_params[:vendor_specific][:stripped_signature])
+      .to eq "The Lannisters send their regards"
   end
 
-  it 'adds stripped-text as a vendor specific param' do
-    normalized_params = Griddler::Mailgun::Adapter.normalize_params(default_params)
-    expect(normalized_params[:vendor_specific][:stripped_text]).to eq "And attachments. Two of them. An image and a text file."
+  it "adds stripped-text as a vendor specific param" do
+    params = default_params.merge(
+      "stripped-text" => "Lorem ipsum dolor sit amet."
+    )
+    normalized_params = Griddler::Mailgun::Adapter.normalize_params(params)
+    expect(normalized_params[:vendor_specific][:stripped_text])
+      .to eq "Lorem ipsum dolor sit amet."
   end
 
-  it 'adds stripped-html as a vendor specific param' do
-    normalized_params = Griddler::Mailgun::Adapter.normalize_params(default_params)
-    expect(normalized_params[:vendor_specific][:stripped_html]).to eq "<div dir=\"ltr\">And attachments. Two of them. An image and a text file.</div>\r\n"
+  it "adds stripped-html as a vendor specific param" do
+    params = default_params.merge(
+      "stripped-html" => "<div>Lorem ipsum dolor sit amet.</div>"
+    )
+    normalized_params = Griddler::Mailgun::Adapter.normalize_params(params)
+    expect(normalized_params[:vendor_specific][:stripped_html])
+      .to eq "<div>Lorem ipsum dolor sit amet.</div>"
   end
 
   it 'bcc is empty array when it missing' do
