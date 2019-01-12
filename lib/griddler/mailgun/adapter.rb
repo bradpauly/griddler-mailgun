@@ -22,7 +22,12 @@ module Griddler
           text: params['body-plain'],
           html: params['body-html'],
           attachments: attachment_files,
-          headers: serialized_headers
+          headers: serialized_headers,
+          vendor_specific: {
+            stripped_text: params["stripped-text"],
+            stripped_signature: params["stripped-signature"],
+            stripped_html: params["stripped-html"]
+          }
         }
       end
 
